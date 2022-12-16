@@ -1,0 +1,24 @@
+{
+  "name": "blinsoft",
+  "version": "1.0.0",
+  "description": "This is an internship project for trip planner",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhaashutosh/blinsoft-trip-planner-backend.git"
+  },
+  "keywords": [
+    "Trip-Planner",
+    "Backend-Project"
+  ],
+  "author": "Ashutosh Kumar Jha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jhaashutosh/blinsoft-trip-planner-backend/issues"
+  },
+  "homepage": "https://github.com/jhaashutosh/blinsoft-trip-planner-backend#readme"
+}
