@@ -7,7 +7,7 @@ const router = express.Router();
 //authentication is required to open trips page:
 
 //getting all trips data:
-router.get("/", (req, res) => {
+router.get("/", isAuthenticated, (req, res) => {
   Trip.find()
     .then((tripData) => res.send(tripData))
     .catch((err) => {
@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
 
 //getting a particular trip's Data:
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", isAuthenticated, async (req, res) => {
   const id = req.params.id;
   Trip.findById(id)
     .then((data) => {
@@ -35,7 +35,7 @@ router.get("/:id", async (req, res) => {
 });
 
 //adding new trip to the list:
-router.post("/", async (req, res) => {
+router.post("/", isAuthenticated, async (req, res) => {
   const tripData = await Trip.findOne({ destination: req.body.destination });
   if (tripData)
     return res.status(400).send("This location is already in your list");
@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
 });
 
 //updating already added trip data:
-router.put("/:id", async (req, res) => {
+router.put("/:id", isAuthenticated, async (req, res) => {
   if (!req.body) {
     return res.status(400).send({ message: "Data to update can not be empty" });
   }
@@ -64,7 +64,7 @@ router.put("/:id", async (req, res) => {
 });
 
 //deleting already added trip data:
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isAuthenticated, async (req, res) => {
   const id = req.params.id;
   Trip.findByIdAndDelete(id)
     .then((data) => {
