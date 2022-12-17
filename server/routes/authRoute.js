@@ -13,7 +13,6 @@ router.post("/register", async (req, res) => {
 
   req.body.password = await bcrypt.hash(req.body.password, 10);
   const newUser = await User.create(req.body);
-  console.log(newUser);
   const userData = await newUser.save();
   res.status(201).send(newUser);
 });
@@ -26,11 +25,15 @@ router.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/register",
-    successRedirect: "/trips",
+    successRedirect: "/add-trip",
   }),
   (req, res) => {
     return res.send("success");
   }
 );
+
+router.get("/login", (req, res) => {
+  res.send("This is login page");
+});
 
 module.exports = router;

@@ -1,7 +1,9 @@
 const express = require("express");
 const passport = require("passport");
-require("dotenv").config();
+const morgan = require("morgan");
 const expressSession = require("express-session");
+const bodyparser = require("body-parser");
+require("dotenv").config();
 const { connectMongoose } = require("./database/dBconnect");
 const {
   initializingPassport,
@@ -31,14 +33,18 @@ app.use(passport.session());
 
 //built in middlewares:
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(morgan("tiny"));
+
+//parse requests to body-parser
+app.use(bodyparser.urlencoded({ extended: true }));
 
 //routes
 app.use("/", require("./routes/authRoute"));
-app.use("/trips", require("./routes/tripRoute"));
 
-//for testing of protected route
+//routes for CRUD operations
+app.use("/add-trip", require("./routes/tripRoute"));
 
+//for testing of protected route:
 // here if user is not found, page will be redirected to login page
 app.get("/profile", isAuthenticated, (req, res) => {
   res.send(req.user);
