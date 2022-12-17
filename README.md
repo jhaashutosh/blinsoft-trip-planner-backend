@@ -1,7 +1,5 @@
 # This is the README for BlinSoft Internship Project
 
-> ![Image](assets/img/tripData.png)
-
 ### Backend for customization of itenaries for a trip-planner project.
 
 ## Technology Used
